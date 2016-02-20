@@ -44,8 +44,8 @@ public class Explorer {
 
         List<game.NodeStatus> checkedTiles = new ArrayList<NodeStatus>();
 
-        long initialState = state.getCurrentLocation();
-        depthFirstSearch(state, initialState, checkedTiles);
+        long initialTile = state.getCurrentLocation();
+        depthFirstSearch(state, initialTile, checkedTiles);
 
 
         // Remember to return after my search method;
@@ -79,6 +79,9 @@ public class Explorer {
         //TODO: Escape from the cavern before time runs out
 
     }
+
+
+// Search methods
 
     public void depthFirstSearch(ExplorationState myState, long prevTile, List<NodeStatus> checked) {
 
@@ -115,6 +118,12 @@ public class Explorer {
 
     }
 
-}
+// Escape Methods
 
+    public void alwaysEscapes() {
+
+    }
+
+
+}
 
