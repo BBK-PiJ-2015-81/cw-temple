@@ -37,6 +37,8 @@ public class Explorer {
      */
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
+        depthFirstSearch();
+
     }
 
     /**
@@ -64,5 +66,17 @@ public class Explorer {
      */
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
+
     }
+
+    public void depthFirstSearch() {
+
+        if (getDistanceToTarget() == 0 ) {
+
+        }
+
+    }
+
 }
+
+
