@@ -104,6 +104,7 @@ public class Explorer {
 
         }
 
+        // Need to do something if all the neighbours have been checked and we're not at the Orb
 
 
     }
