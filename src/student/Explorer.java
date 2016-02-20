@@ -75,6 +75,8 @@ public class Explorer {
 
     public void depthFirstSearch(ExplorationState myState) {
 
+        long updatedState = myState.getCurrentLocation();
+
         // If we find the Orb immediately
         if (myState.getDistanceToTarget() == 0 ) {
             return;
@@ -85,6 +87,9 @@ public class Explorer {
 
         for (NodeStatus eachNeighbour : myState.getNeighbours()) {
             myState.moveTo(eachNeighbour.getId());
+
+            // Update current location so we can look for new neighbours
+            depthFirstSearch(myState);
         }
 
 
