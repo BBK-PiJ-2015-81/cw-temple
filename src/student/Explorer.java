@@ -38,7 +38,10 @@ public class Explorer {
      */
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
-        depthFirstSearch(state);
+
+        long initialState = state.getCurrentLocation();
+        depthFirstSearch(state, initialState);
+
 
         // Remember to return after my search method;
         System.out.println(state.getNeighbours());
@@ -73,9 +76,9 @@ public class Explorer {
 
     }
 
-    public void depthFirstSearch(ExplorationState myState) {
+    public void depthFirstSearch(ExplorationState myState, long updatedState) {
 
-        long updatedState = myState.getCurrentLocation();
+        updatedState = myState.getCurrentLocation();
 
         // If we find the Orb immediately
         if (myState.getDistanceToTarget() == 0 ) {
@@ -89,7 +92,7 @@ public class Explorer {
             myState.moveTo(eachNeighbour.getId());
 
             // Update current location so we can look for new neighbours
-            depthFirstSearch(myState);
+            depthFirstSearch(myState, updatedState);
         }
 
 
