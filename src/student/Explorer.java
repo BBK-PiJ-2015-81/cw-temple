@@ -39,6 +39,8 @@ public class Explorer {
         //TODO : Explore the cavern and find the orb
         depthFirstSearch(state);
 
+        // Remember to return after my search method;
+        return;
     }
 
     /**
@@ -76,7 +78,7 @@ public class Explorer {
             return;
 
         // Figure out which neighbour is closest to the orb and move there
-
+        // Probably want to track where I've
 
 
         }
