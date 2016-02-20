@@ -121,6 +121,8 @@ public class Explorer {
 // Escape Methods
 
     public void alwaysEscapes() {
+    // Find shortest path to the exit
+
 
     }
 
