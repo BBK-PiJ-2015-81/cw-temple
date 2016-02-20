@@ -74,6 +74,11 @@ public class Explorer {
         // If we find the Orb immediately
         if (myState.getDistanceToTarget() == 0 ) {
             return;
+
+        // Figure out which neighbour is closest to the orb and move there
+
+
+
         }
 
 
