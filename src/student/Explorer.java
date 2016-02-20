@@ -80,9 +80,9 @@ public class Explorer {
 
     }
 
-    public void depthFirstSearch(ExplorationState myState, long updatedState, List<NodeStatus> checked) {
+    public void depthFirstSearch(ExplorationState myState, long prevTile, List<NodeStatus> checked) {
 
-        updatedState = myState.getCurrentLocation();
+        long currentTile = myState.getCurrentLocation();
 
         // If we find the Orb immediately
         if (myState.getDistanceToTarget() == 0 ) {
@@ -97,15 +97,17 @@ public class Explorer {
             if (!checked.contains(neighbourTile)) {
                 checked.add(neighbourTile);
                 myState.moveTo(neighbourTile.getId());
-                // Update current location so we can look for new neighbours
-                depthFirstSearch(myState, updatedState, checked);
+                // Look at new neighbours, take a step
+                depthFirstSearch(myState, currentTile, checked);
 
             }
 
         }
 
         // Need to do something if all the neighbours have been checked and we're not at the Orb
-
+        if (checked.containsAll(myState.getNeighbours())){
+            myState.moveTo(prevTile);
+        }
 
     }
 
