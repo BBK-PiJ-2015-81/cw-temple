@@ -37,7 +37,7 @@ public class Explorer {
      */
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
-        depthFirstSearch();
+        depthFirstSearch(state);
 
     }
 
@@ -69,11 +69,14 @@ public class Explorer {
 
     }
 
-    public void depthFirstSearch() {
+    public void depthFirstSearch(ExplorationState myState) {
 
-        if (getDistanceToTarget() == 0 ) {
-
+        // If we find the Orb immediately
+        if (myState.getDistanceToTarget() == 0 ) {
+            return;
         }
+
+
 
     }
 
