@@ -2,6 +2,7 @@ package student;
 
 import game.EscapeState;
 import game.ExplorationState;
+import game.NodeStatus;
 
 public class Explorer {
 
@@ -40,6 +41,7 @@ public class Explorer {
         depthFirstSearch(state);
 
         // Remember to return after my search method;
+        System.out.println(state.getNeighbours());
         return;
     }
 
@@ -76,11 +78,13 @@ public class Explorer {
         // If we find the Orb immediately
         if (myState.getDistanceToTarget() == 0 ) {
             return;
+        }
 
         // Figure out which neighbour is closest to the orb and move there
-        // Probably want to track where I've
+        // Track where I've been.
 
-
+        for (NodeStatus eachNeighbour : myState.getNeighbours()) {
+            myState.moveTo(eachNeighbour.getId());
         }
 
 
