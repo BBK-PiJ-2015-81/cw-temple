@@ -4,6 +4,9 @@ import game.EscapeState;
 import game.ExplorationState;
 import game.NodeStatus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Explorer {
 
     /**
@@ -39,12 +42,13 @@ public class Explorer {
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
 
+        List<game.NodeStatus> checkedTiles = new ArrayList<NodeStatus>();
+
         long initialState = state.getCurrentLocation();
-        depthFirstSearch(state, initialState);
+        depthFirstSearch(state, initialState, checkedTiles);
 
 
         // Remember to return after my search method;
-        System.out.println(state.getNeighbours());
         return;
     }
 
@@ -76,7 +80,7 @@ public class Explorer {
 
     }
 
-    public void depthFirstSearch(ExplorationState myState, long updatedState) {
+    public void depthFirstSearch(ExplorationState myState, long updatedState, List<NodeStatus> checked) {
 
         updatedState = myState.getCurrentLocation();
 
@@ -85,14 +89,19 @@ public class Explorer {
             return;
         }
 
-        // Figure out which neighbour is closest to the orb and move there
-        // Track where I've been.
 
-        for (NodeStatus eachNeighbour : myState.getNeighbours()) {
-            myState.moveTo(eachNeighbour.getId());
+        // Check each neighbour and it's neighbours
+        for (NodeStatus neighbourTile : myState.getNeighbours()) {
 
-            // Update current location so we can look for new neighbours
-            depthFirstSearch(myState, updatedState);
+            // If this neighbour tile isn't on my 'checked' list, add to my list and take a step
+            if (!checked.contains(neighbourTile)) {
+                checked.add(neighbourTile);
+                myState.moveTo(neighbourTile.getId());
+                // Update current location so we can look for new neighbours
+                depthFirstSearch(myState, updatedState, checked);
+
+            }
+
         }
 
 
