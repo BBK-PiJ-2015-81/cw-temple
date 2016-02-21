@@ -78,6 +78,11 @@ public class Explorer {
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
 
+
+
+
+
+
     }
 
 
@@ -120,10 +125,20 @@ public class Explorer {
 
 // Escape Methods
 
-    public void alwaysEscapes() {
-    // Find shortest path to the exit
+    public void alwaysEscapes(EscapeState myState) {
+
+        // Return when we reach the exit
+        if (myState.getCurrentNode() == myState.getExit()) {
+            return;
+        }
+
+        // Find shortest path to the exit
 
         // Get all the Nodes
+
+        myState.getVertices();
+
+
         // Find the shortest path to each node
 
 
