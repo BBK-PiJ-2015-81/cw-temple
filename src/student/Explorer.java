@@ -5,6 +5,7 @@ import game.ExplorationState;
 import game.NodeStatus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Explorer {
@@ -42,10 +43,12 @@ public class Explorer {
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
 
+
+        // Create a list to store tiles checked for the Orb
         List<game.NodeStatus> checkedTiles = new ArrayList<NodeStatus>();
 
-        long initialTile = state.getCurrentLocation();
-        depthFirstSearch(state, initialTile, checkedTiles);
+        // Call explore method
+        depthFirstSearch(state, state.getCurrentLocation(), checkedTiles);
 
 
         // Remember to return after my search method;
@@ -78,9 +81,10 @@ public class Explorer {
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
 
+        alwaysEscapes(state);
 
-
-
+        // Remember to return after my escape method;
+        return;
 
 
     }
@@ -98,8 +102,13 @@ public class Explorer {
         }
 
 
+        // Sort my neighbours so the 'closest' neighbour to orb is checked first
+        List<game.NodeStatus> myNeighbours;
+        myNeighbours = (List<NodeStatus>) myState.getNeighbours();
+        Collections.sort(myNeighbours);
+
         // Check each neighbour and it's neighbours
-        for (NodeStatus neighbourTile : myState.getNeighbours()) {
+        for (NodeStatus neighbourTile : myNeighbours) {
 
             // If this neighbour tile isn't on my 'checked' list, add to my list and take a step
             if (!checked.contains(neighbourTile)) {
