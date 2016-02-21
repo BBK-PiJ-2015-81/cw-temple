@@ -123,6 +123,9 @@ public class Explorer {
     public void alwaysEscapes() {
     // Find shortest path to the exit
 
+        // Get all the Nodes
+        // Find the shortest path to each node
+
 
     }
 
