@@ -2,6 +2,7 @@ package student;
 
 import game.EscapeState;
 import game.ExplorationState;
+import game.Node;
 import game.NodeStatus;
 
 import java.util.ArrayList;
@@ -81,7 +82,11 @@ public class Explorer {
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
 
-        alwaysEscapes(state);
+        // Create lists to store tiles
+        List<game.Node> checkedTiles = new ArrayList<Node>();
+        List<game.Node> unCheckedTiles = new ArrayList<Node>();
+
+        shortestPath(state, state.getCurrentNode(), unCheckedTiles );
 
         // Remember to return after my escape method;
         return;
@@ -102,9 +107,9 @@ public class Explorer {
         }
 
 
-        // Sort my neighbours so the 'closest' neighbour to orb is checked first
+        // Sort my neighbours so the 'closest' neighbour to the orb is checked first
         List<game.NodeStatus> myNeighbours;
-        myNeighbours = (List<NodeStatus>) myState.getNeighbours();
+        myNeighbours = (List<game.NodeStatus>) myState.getNeighbours();
         Collections.sort(myNeighbours);
 
         // Check each neighbour and it's neighbours
@@ -134,21 +139,36 @@ public class Explorer {
 
 // Escape Methods
 
-    public void alwaysEscapes(EscapeState myState) {
+    public void shortestPath(EscapeState myState, Node prevNode, List<Node> unChecked) {
 
         // Return when we reach the exit
         if (myState.getCurrentNode() == myState.getExit()) {
             return;
         }
 
-        // Find shortest path to the exit
+        // Make a list of tiles on the shortest path
 
-        // Get all the Nodes
+        // Check each neighbour and it's neighbours
+        for (game.Node tile : unChecked) {
 
-        myState.getVertices();
+            // If this neighbour tile isn't on my 'checked' list, add to my list and take a step
+            if (!unChecked.contains(tile)) {
+                unChecked.add(tile);
+                myState.moveTo(tile);
+                // Look at new neighbours, take a step
+                shortestPath(myState, myState.getCurrentNode(), unChecked);
+
+            }
+
+            if(myState.getCurrentNode() == myState.getExit()) {
+                break;
+            }
+
+        }
 
 
-        // Find the shortest path to each node
+
+
 
 
     }
