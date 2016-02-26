@@ -8,6 +8,7 @@ import game.NodeStatus;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class Explorer {
 
@@ -82,11 +83,11 @@ public class Explorer {
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
 
-        // Create lists to store tiles
+        // Create lists to store checked and unchecked tiles
         List<game.Node> checkedTiles = new ArrayList<Node>();
         List<game.Node> unCheckedTiles = new ArrayList<Node>();
 
-        shortestPath(state, state.getCurrentNode(), unCheckedTiles );
+        //shortestPath( );
 
         // Remember to return after my escape method;
         return;
@@ -136,43 +137,6 @@ public class Explorer {
         }
 
     }
-
-// Escape Methods
-
-    public void shortestPath(EscapeState myState, Node prevNode, List<Node> unChecked) {
-
-        // Return when we reach the exit
-        if (myState.getCurrentNode() == myState.getExit()) {
-            return;
-        }
-
-        // Make a list of tiles on the shortest path
-
-        // Check each neighbour and it's neighbours
-        for (game.Node tile : unChecked) {
-
-            // If this neighbour tile isn't on my 'checked' list, add to my list and take a step
-            if (!unChecked.contains(tile)) {
-                unChecked.add(tile);
-                myState.moveTo(tile);
-                // Look at new neighbours, take a step
-                shortestPath(myState, myState.getCurrentNode(), unChecked);
-
-            }
-
-            if(myState.getCurrentNode() == myState.getExit()) {
-                break;
-            }
-
-        }
-
-
-
-
-
-
-    }
-
 
 }
 
