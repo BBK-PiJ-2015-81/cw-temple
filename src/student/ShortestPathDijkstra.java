@@ -23,7 +23,7 @@ public class ShortestPathDijkstra {
 
             //System.out.println(state.getTimeRemaining());
 
-            // Head home when 150 steps left
+            // Head straight to exit when 150 steps left
             if (pathToExit.size() +150 < state.getTimeRemaining()) {
 
                 Node recentOnPath = state.getCurrentNode();
@@ -35,6 +35,7 @@ public class ShortestPathDijkstra {
 
                     // Only grab gold from near tiles if we have time
                     // Retrace steps after picking up gold
+                    // Get back on shortest path
 
                     if (a.getTile().getGold() != 0 && !pathToExit.contains(a) && pathToExit.size() +200 < state.getTimeRemaining()) {
                         state.moveTo(a);
