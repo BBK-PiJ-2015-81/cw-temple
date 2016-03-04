@@ -4,11 +4,8 @@ import game.EscapeState;
 import game.ExplorationState;
 import game.Node;
 import game.NodeStatus;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class Explorer {
 
@@ -45,13 +42,12 @@ public class Explorer {
     public void explore(ExplorationState state) {
         //TODO : Explore the cavern and find the orb
 
-
         // Create a list to store tiles checked for the Orb
         List<game.NodeStatus> checkedTiles = new ArrayList<NodeStatus>();
 
         // Call explore method
-        depthFirstSearch(state, state.getCurrentLocation(), checkedTiles);
-
+        FindOrb searchForOrb = new FindOrb();
+        searchForOrb.depthFirstSearch(state, state.getCurrentLocation(), checkedTiles);
 
         // Remember to return after my search method;
         return;
@@ -83,60 +79,15 @@ public class Explorer {
     public void escape(EscapeState state) {
         //TODO: Escape from the cavern before time runs out
 
-        // Create lists to store checked and unchecked tiles
-        List<game.Node> checkedTiles = new ArrayList<Node>();
-        List<game.Node> unCheckedTiles = new ArrayList<Node>();
+        List<Node> pathToExit = ShortestPathDijkstra.dijkstra(state.getCurrentNode(), state.getExit());
+        pathToExit.remove(0);
 
-        //shortestPath( );
+        ShortestPathDijkstra pathTaken = new ShortestPathDijkstra();
+        pathTaken.takePath(state, pathToExit);
 
         // Remember to return after my escape method;
         return;
 
 
     }
-
-
-// Search methods
-
-    public void depthFirstSearch(ExplorationState myState, long prevTile, List<NodeStatus> checked) {
-
-        long currentTile = myState.getCurrentLocation();
-
-        // If we find the Orb immediately
-        if (myState.getDistanceToTarget() == 0 ) {
-            return;
-        }
-
-
-        // Sort my neighbours so the 'closest' neighbour to the orb is checked first
-        List<game.NodeStatus> myNeighbours;
-        myNeighbours = (List<game.NodeStatus>) myState.getNeighbours();
-        Collections.sort(myNeighbours);
-
-        // Check each neighbour and it's neighbours
-        for (NodeStatus neighbourTile : myNeighbours) {
-
-            // If this neighbour tile isn't on my 'checked' list, add to my list and take a step
-            if (!checked.contains(neighbourTile)) {
-                checked.add(neighbourTile);
-                myState.moveTo(neighbourTile.getId());
-                // Look at new neighbours, take a step
-                depthFirstSearch(myState, currentTile, checked);
-
-            }
-
-           if(myState.getDistanceToTarget() == 0) {
-               break;
-           }
-
-        }
-
-        // Need to do something if all the neighbours have been checked and we're not at the Orb
-        if (checked.containsAll(myState.getNeighbours())){
-            myState.moveTo(prevTile);
-        }
-
-    }
-
 }
-
