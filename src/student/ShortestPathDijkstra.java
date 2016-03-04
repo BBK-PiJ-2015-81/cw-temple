@@ -37,25 +37,32 @@ public class ShortestPathDijkstra {
                     // Retrace steps after picking up gold
                     // Get back on shortest path
 
-                    if (a.getTile().getGold() != 0 && !pathToExit.contains(a) && pathToExit.size() +200 < state.getTimeRemaining()) {
+                    if (a.getTile().getGold() != 0 && !pathToExit.contains(a)
+                            && pathToExit.size() +200 < state.getTimeRemaining()) {
                         state.moveTo(a);
                         state.pickUpGold();
 
+
                         List<Node> adjacentTilesB = new ArrayList<Node>(a.getNeighbours());
                         for (Node b : adjacentTilesB) {
-                            if (b.getTile().getGold() != 0 && !pathToExit.contains(b) && pathToExit.size() + 250 < state.getTimeRemaining()) {
+                            if (b.getTile().getGold() != 0 && !pathToExit.contains(b)
+                                    && pathToExit.size() + 250 < state.getTimeRemaining()) {
                                 state.moveTo(b);
                                 state.pickUpGold();
 
+
                                 List<Node> adjacentTilesC = new ArrayList<Node>(b.getNeighbours());
                                 for (Node c : adjacentTilesC) {
-                                    if (c.getTile().getGold() != 0 && !pathToExit.contains(c) && pathToExit.size() + 300 < state.getTimeRemaining()) {
+                                    if (c.getTile().getGold() != 0 && !pathToExit.contains(c)
+                                            && pathToExit.size() + 300 < state.getTimeRemaining()) {
                                         state.moveTo(c);
                                         state.pickUpGold();
 
+
                                         List<Node> adjacentTilesD = new ArrayList<Node>(c.getNeighbours());
                                         for (Node d : adjacentTilesD) {
-                                            if (d.getTile().getGold() != 0 && !pathToExit.contains(d) && pathToExit.size() + 350 < state.getTimeRemaining()) {
+                                            if (d.getTile().getGold() != 0 && !pathToExit.contains(d)
+                                                    && pathToExit.size() + 350 < state.getTimeRemaining()) {
                                                 state.moveTo(d);
                                                 state.pickUpGold();
                                                 state.moveTo(c);
